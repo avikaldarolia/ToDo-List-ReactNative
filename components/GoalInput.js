@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { View, TextInput, Button, StyleSheet, Modal } from "react-native"
+import { View, TextInput, Button, StyleSheet, Modal, Image} from "react-native"
 
 function GoalInput(props) {
     const [enteredGoalText, setEnteredGoalText] = useState('')
@@ -12,17 +12,19 @@ function GoalInput(props) {
     }
     function endGoalHandler() {
         props.onEndGoal()
+        setEnteredGoalText('')
     }
     return (
         <Modal visible={props.visible} animationType={"slide"}>
             <View style={styles.inputContainer}>
+                <Image style={styles.image} source={require('../assets/images/goal.png')} />
                 <TextInput style={styles.textInput} placeholder='Your Course Goals!' onChangeText={goalInputHandler} value={enteredGoalText} />
                 <View style={styles.buttonContainer}>
-                    <View style={styles.button}>
-                        <Button title='Add Goal!' onPress={addGoalHandler} />
+                    <View style={styles.button}> 
+                        <Button title="Cancel" color={"#f31282"} onPress={endGoalHandler} />
                     </View>
                     <View style={styles.button}>
-                        <Button title="Cancel" onPress={endGoalHandler} />
+                        <Button title='Add Goal!' color={"#5e0acc"} onPress={addGoalHandler} />
                     </View>
                 </View>
             </View>
@@ -37,19 +39,24 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 24,
-        borderBottomWidth: 1,
-        borderBottomColor: '#cccccc',
-        padding: 16
+        padding: 16,
+        backgroundColor: '#311b6b'
+    },
+    image: {
+        width: 100,
+        height: 100,
+        margin: 20
     },
     textInput: {
         borderWidth: 1,
-        borderColor: '#cccccc',
+        borderColor: '#e4d0ff',
+        backgroundColor: '#e4d0ff',
+        borderRadius: 6,
         width: '100%',
-        padding: 6
+        padding: 6,
     },
     buttonContainer: {
-        marginTop: 16,
+        marginTop: 20,
         flexDirection: 'row'
     },
     button: {
